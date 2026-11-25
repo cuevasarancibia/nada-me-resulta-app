@@ -11,13 +11,21 @@ import {
   Star,
   UserCheck,
 } from 'lucide-react';
-import { GameSection, StoryWorld3D } from './components/StoryWorld3D';
 import { QuizGame } from './components/QuizGame';
 import { GuessCharacterGame } from './components/GuessCharacterGame';
 import { MatchNamesGame } from './components/MatchNamesGame';
 import { OrderScenesGame } from './components/OrderScenesGame';
 import { WordSearchGame } from './components/WordSearchGame';
 import { BookAnimationsPanel } from './remotion/BookAnimations';
+
+export type GameSection =
+  | 'home'
+  | 'quiz'
+  | 'guess'
+  | 'match'
+  | 'order'
+  | 'wordsearch'
+  | 'cinema';
 
 const GAMES: {
   id: GameSection;
@@ -130,7 +138,7 @@ export function App() {
               section === 'home' ? 'primary' : ''
             }`}
           >
-            <Home className="w-4 h-4" /> Inicio 3D
+            <Home className="w-4 h-4" /> Inicio
           </button>
           <button
             onClick={() => setSection('quiz')}
@@ -187,10 +195,67 @@ export function App() {
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-6 space-y-6">
         {section === 'home' && (
           <>
-            <StoryWorld3D
-              completedGames={completed}
-              onSelectSection={setSection}
-            />
+            {/* Illustrated Storybook Hero Banner */}
+            <div className="storybook-card overflow-hidden relative bg-[#fffdf7]">
+              <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] items-center">
+                <div className="p-5 sm:p-7 space-y-3">
+                  <span className="inline-block px-3 py-1 rounded-full bg-[#fef3d1] border-2 border-[#2a2420] text-xs font-extrabold uppercase tracking-wide">
+                    📖 El Barco de Vapor • Neva Milicic
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-bold m-0 text-[#2a2420]">
+                    ¡Acompaña a Cristóbal en su gran día!
+                  </h2>
+                  <p className="text-sm sm:text-base font-semibold text-[#6e635b] m-0">
+                    Lee y escucha el libro completo en el{' '}
+                    <strong>Audiolibro Remotion</strong> o juega los 5 desafíos
+                    para cambiar el humor de Cristóbal de la lluvia a las estrellas.
+                  </p>
+                  <div className="flex flex-wrap gap-2.5 pt-1">
+                    <button
+                      onClick={() => setSection('cinema')}
+                      className="storybook-btn primary !text-sm sm:!text-base"
+                    >
+                      <Film className="w-4 h-4" /> Escuchar Audiolibro
+                    </button>
+                    <button
+                      onClick={() => setSection('quiz')}
+                      className="storybook-btn gold !text-sm sm:!text-base"
+                    >
+                      <HelpCircle className="w-4 h-4" /> Empezar a jugar
+                    </button>
+                  </div>
+                </div>
+
+                <div className="relative h-48 sm:h-60 md:h-full min-h-[200px] border-t-[3px] md:border-t-0 md:border-l-[3px] border-[#2a2420]">
+                  <img
+                    src={
+                      completed.length >= 3
+                        ? '/images/scene-stars.jpg'
+                        : completed.length >= 1
+                        ? '/images/scene-lemonade.jpg'
+                        : '/images/scene-rain.jpg'
+                    }
+                    alt="Escena de ¡Nada me resulta!"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2.5 bg-[#fffdf7]/95 backdrop-blur border-2 border-[#2a2420] rounded-2xl p-2 shadow">
+                    <img
+                      src="/images/cristobal.jpg"
+                      alt="Cristóbal"
+                      className="w-11 h-11 rounded-xl object-cover border-2 border-[#2a2420] shrink-0"
+                    />
+                    <div className="text-xs sm:text-sm font-bold leading-tight">
+                      <div>Humor actual: {mood.emoji} {mood.text}</div>
+                      <div className="text-[#6e635b] font-semibold">
+                        {completed.length >= 3
+                          ? '¡Cielo lleno de estrellas!'
+                          : `Completa ${3 - completed.length} juego(s) más para despejar la lluvia`}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {GAMES.map((g) => {
@@ -241,7 +306,7 @@ export function App() {
       </main>
 
       <footer className="text-center py-4 px-4 text-xs sm:text-sm font-bold text-[#6e635b]">
-        Basado en el libro “¡Nada me resulta!” de Neva Milicic (El Barco de Vapor) • Hecho con React, Three.js y Remotion
+        Basado en el libro “¡Nada me resulta!” de Neva Milicic (El Barco de Vapor) • Hecho con React y Remotion
       </footer>
     </div>
   );
