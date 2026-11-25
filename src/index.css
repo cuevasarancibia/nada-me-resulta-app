@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #faf5e8;
+  --paper: #fffdf7;
+  --ink: #2a2420;
+  --muted: #6e635b;
+  --red: #d94e3b;
+  --red-dark: #b33827;
+  --blue: #4a90e2;
+  --blue-soft: #dcebfa;
+  --green: #5b9268;
+  --green-soft: #e3f2e6;
+  --gold: #f5b82e;
+  --gold-soft: #fef3d1;
+  --purple: #7d61b8;
+  --border: #e5dcc8;
+  --shadow: 0 8px 0 rgba(42, 36, 32, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(#e5dcc8 1.2px, transparent 1.2px),
+    radial-gradient(#e5dcc8 1.2px, var(--cream) 1.2px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Fredoka', system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.storybook-card {
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 24px;
+  box-shadow: 0 8px 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.storybook-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  font-family: 'Fredoka', system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+}
+
+.storybook-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--ink);
+}
+
+.storybook-btn:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+.storybook-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.storybook-btn.primary {
+  background: var(--red);
+  color: #fff;
+}
+
+.storybook-btn.blue {
+  background: var(--blue);
+  color: #fff;
+}
+
+.storybook-btn.green {
+  background: var(--green);
+  color: #fff;
+}
+
+.storybook-btn.gold {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.float-slow {
+  animation: floatSlow 3.2s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: #cbbda3;
+  border-radius: 99px;
+  border: 2px solid var(--cream);
+}
